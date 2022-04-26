@@ -2,10 +2,11 @@
 
 namespace App;
 
+use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
+use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
+use MiladRahimi\PhpRouter\Router;
+
 use ApertureCore\Database\DatabaseConfig;
-use ApertureCore\Http\InvalidRootData;
-use ApertureCore\Http\RouteNotFoundException;
-use ApertureCore\Http\Router;
 use ApertureCore\View;
 use App\Controller\PageController;
 use App\Controller\ToyController;
@@ -29,7 +30,7 @@ class App implements DatabaseConfig
     private Router $router ;
 
     private function __construct(){
-        $this->router = new Router();
+        $this->router =  Router::create();
     }
 
     #region Interface database functions
@@ -64,19 +65,18 @@ class App implements DatabaseConfig
 
     private function registerNewRoutes() : void
     {
-        $this->router
-            ->registerRoute('get|/', [PageController::class,'index'])
-            ->registerRoute('get|/mentions-legales', [PageController::class,'legalNotice'])
-            ->registerRoute('get|/toy-list', [ToyController::class,'index']);
+        $this->router->get('/', [PageController::class,'index']);
+            $this->router->get('/mentions-legales', [PageController::class,'legalNotice']);
+            $this->router->get('/toy-list', [ToyController::class,'index']);
     }
 
     private function startRouter() : void
     {
         try {
-            $this->router->start();
+            $this->router->dispatch();
         }catch(RouteNotFoundException $e){
             View::renderError(404);
-        } catch (InvalidRootData $e){
+        } catch (InvalidCallableException $e){
             View::renderError(500);
         }
     }
