@@ -1,0 +1,40 @@
+
+
+.container_header{
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: crimson;
+}
+
+ul{
+    display: flex;
+}
+
+li{
+    display: flex;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.logo img{
+    height: 150px;
+    border-radius: 68px;
+}
+
+.icon_co img{
+    height: 136px;
+}
+
+footer{
+    height: 100px;
+    background-color: crimson;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer a{
+    padding-left: 5px;
+}

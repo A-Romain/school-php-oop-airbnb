@@ -25,7 +25,7 @@ class PageController
         ];
         
         $toto = AppRepoManager::getRm();
-        var_dump($toto->getToyRepository()->findById(5));
+
 
         $view = new View('pages/home');
 
