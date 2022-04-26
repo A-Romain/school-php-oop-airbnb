@@ -1,0 +1,1 @@
+console.log('Salut a tous c\'est fantaaa !')
