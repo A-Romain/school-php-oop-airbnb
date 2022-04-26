@@ -1,24 +1,14 @@
-# Vérification de la présence du module mod_rewrite
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
 
-    # Activation du moteur de réécriture
     RewriteEngine On
 
-    # Conditions pour la règle (RewriteRule) qui suit
-    # Les conditions s'appliquent avec un ET logique
-    # Toutes les conditions doivent être vraies pour appliquer la règle
-    # !-f = L'URL ne pointe pas vers un fichier physique
-    # !-d = L'URL ne pointe pas vers un dossier physique
-    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-        # Si la requête commence par n'importe quoi, alors affiche index.php
-        # ^ = l'url commence par n'importe quoi
-        # [] = flags permet de contrôler la requête à exécuter
-        #   QSA (Query String Append) permet de garder les paramètres d'URL (?toto=3)
-        #   L = Last rule : si la règle est appliquée, toutes suivantes sont ignorée
-        RewriteRule ^ index.php [QSA,L]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 </IfModule>
