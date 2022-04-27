@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Controller\AnnonceController;
+use App\Controller\AnnoncesController;
+use App\Controller\ReservationController;
 use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
 use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
 use MiladRahimi\PhpRouter\Router;
@@ -67,7 +70,9 @@ class App implements DatabaseConfig
     {
         $this->router->get('/', [PageController::class,'index']);
             $this->router->get('/mentions-legales', [PageController::class,'legalNotice']);
-            $this->router->get('/connexion', [ConnexionController::class,'index']);
+            $this->router->get('/connexion', [ConnexionController::class,'connexion']);
+            $this->router->get('/annonce', [AnnoncesController::class,'annonce']);
+            $this->router->get('/reservation',[ReservationController::class,'reservation']);
 
     }
 

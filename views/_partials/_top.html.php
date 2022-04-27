@@ -19,9 +19,8 @@
         <div class="nav_bar">
             <nav>
                 <ul>
-                    <li><a href="#Accueil">Accueil</a> </li>
-                    <li><a href="#Annonce">Annonce</a> </li>
-                    <li><a href="#Reservation">Réservation</a> </li>
+                    <li><a href="/annonce">Annonce</a> </li>
+                    <li><a href="/reservation">Réservation</a> </li>
                 </ul>
             </nav>
         </div>

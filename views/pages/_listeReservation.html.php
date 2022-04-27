@@ -1,1 +1,1 @@
-<?php
+<h1>Reservation</h1>
