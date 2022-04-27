@@ -5,7 +5,7 @@ namespace App\Model\Repository;
 use ApertureCore\Repository;
 use App\Model\Toy;
 
-class ToyRepository extends Repository
+class UsersRepository extends Repository
 {
 
     protected function getTableName(): string{ return 'toys'; }

@@ -1,4 +1,6 @@
-
+body{
+    width: 100%;
+}
 
 .container_header{
     height: 200px;
@@ -27,14 +29,60 @@ li{
     height: 136px;
 }
 
+main{
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #FDBFB7;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#container h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+input[type=submit] {
+    background-color: #A9EAFE;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: white;
+    color: #A9EAFE;
+    border: 1px solid #A9EAFE;
+}
+
+footer a{
+    padding-left: 5px;
+}
+
+
 footer{
     height: 100px;
     background-color: crimson;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-footer a{
-    padding-left: 5px;
 }

@@ -26,7 +26,7 @@
             </nav>
         </div>
         <div class="icon_co">
-              <a href="#connexion_inscription"><img src="/assets/img/icon.png"></a>
+              <a href="/connexion"><img src="/assets/img/icon.png"></a>
         </div>
     </div>
 </header>

@@ -9,7 +9,7 @@ use MiladRahimi\PhpRouter\Router;
 use ApertureCore\Database\DatabaseConfig;
 use ApertureCore\View;
 use App\Controller\PageController;
-use App\Controller\ToyController;
+use App\Controller\ConnexionController;
 
 class App implements DatabaseConfig
 {
@@ -67,7 +67,8 @@ class App implements DatabaseConfig
     {
         $this->router->get('/', [PageController::class,'index']);
             $this->router->get('/mentions-legales', [PageController::class,'legalNotice']);
-            $this->router->get('/toy-list', [ToyController::class,'index']);
+            $this->router->get('/connexion', [ConnexionController::class,'index']);
+
     }
 
     private function startRouter() : void

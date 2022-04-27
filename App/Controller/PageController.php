@@ -6,8 +6,8 @@ use ApertureCore\Database\Database;
 use ApertureCore\View;
 use App\App;
 use App\AppRepoManager;
-use App\Model\Repository\ToyRepository;
-use App\Model\Store;
+use App\Model\Repository\UsersRepository;
+use App\Model\Rentals;
 
 class PageController
 {
@@ -27,7 +27,7 @@ class PageController
         $toto = AppRepoManager::getRm();
 
 
-        $view = new View('pages/home');
+        $view = new View('pages/connexion');
 
         $view->render($view_data);
     }
@@ -35,5 +35,12 @@ class PageController
     public function legalNotice(string $oui): void
     {
         echo 'Mentions illégales';
+    }
+
+    public function connexions(): void
+    {
+        $view = new View('pages/connexions');
+
+        $view->render();
     }
 }

@@ -4,11 +4,8 @@ namespace App\Model;
 
 use ApertureCore\Model;
 
-
-class Store extends Model
+class Adresses extends Model
 {
-    public string $name;
-    public int $postal_code;
     public string $city;
-
+    public string $country;
 }

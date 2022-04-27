@@ -3,36 +3,36 @@
 namespace App;
 
 use ApertureCore\RepositoryManager;
-use App\Model\Repository\StoreRepository;
-use App\Model\Repository\ToyRepository;
+use App\Model\Repository\RentalsRepository;
+use App\Model\Repository\UsersRepository;
 
 class AppRepoManager
 {
     use RepositoryManager;
 
-    private StoreRepository  $storeRepository;
-    private ToyRepository  $toyRepository;
+    private RentalsRepository  $storeRepository;
+    private UsersRepository  $toyRepository;
 
     public function __construct()
     {
         $config = App::startApp();
 
-        $this->storeRepository = new StoreRepository($config);
-        $this->toyRepository = new ToyRepository($config);
+        $this->storeRepository = new RentalsRepository($config);
+        $this->toyRepository = new UsersRepository($config);
     }
 
     /**
-     * @return StoreRepository
+     * @return RentalsRepository
      */
-    public function getStoreRepository(): StoreRepository
+    public function getStoreRepository(): RentalsRepository
     {
         return $this->storeRepository;
     }
 
     /**
-     * @return ToyRepository
+     * @return UsersRepository
      */
-    public function getToyRepository(): ToyRepository
+    public function getToyRepository(): UsersRepository
     {
         return $this->toyRepository;
     }
