@@ -12,7 +12,7 @@ class Rentals extends Model
     public int $type;
     public int $surface;
     public string $description;
-    public int $capacity;
-    public int $price;
-    public int $addresse_id;
+    public float $price;
+    public Adresses $adresses;
+    public array $equipement;
 }

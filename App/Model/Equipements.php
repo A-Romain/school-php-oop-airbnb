@@ -7,4 +7,6 @@ use ApertureCore\Model;
 class Equipements extends Model
 {
     public string $label;
+    public int $id;
+
 }

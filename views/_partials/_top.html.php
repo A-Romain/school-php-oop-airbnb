@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -20,7 +20,7 @@
             <nav>
                 <ul>
                     <li><a href="/annonce">Annonce</a> </li>
-                    <li><a href="/reservation">Réservation</a> </li>
+                    <li><a href="/reservation">Réservation</a></li>
                 </ul>
             </nav>
         </div>

@@ -3,12 +3,19 @@
 namespace App\Model\Repository;
 
 use ApertureCore\Repository;
+use App\Model\Bookings;
 
 class BookingsRepository extends Repository
 {
+    protected function getTableName(): string{ return 'bookings'; }
 
-    protected function getTableName(): string
+    public function findAll() : array
     {
-        // TODO: Implement getTableName() method.
+        return $this->readAll(Bookings::class);
+    }
+
+    public function findById( int $id ) : ?Bookings
+    {
+        return $this->readById(Bookings::class, $id);
     }
 }

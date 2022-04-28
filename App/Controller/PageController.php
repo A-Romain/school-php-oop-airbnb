@@ -14,22 +14,10 @@ class PageController
     public function index(): void
     {
 
-        $view_data = [
-            'list_title' => 'Voici les fruits',
-            'fruits_list' => [
-                'banane',
-                'kiwi',
-                'fraise',
-                'pomme',
-            ]
-        ];
-        
-        $toto = AppRepoManager::getRm();
-
-
         $view = new View('pages/connexion');
+        $view->title = 'Connexion';
 
-        $view->render($view_data);
+        $view->render();
     }
 
     public function legalNotice(string $oui): void

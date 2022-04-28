@@ -19,4 +19,17 @@ class ReservationController
 
         $view->render($view_data);
     }
+
+    public function listeRentals()
+    {
+        $view = new View('pages/listeReservation');
+
+        $arr = AppRepoManager::getRm()->getRentalsRepository()->rentals();
+
+
+        $view_data = [
+            'rentals' => $arr,
+        ];
+        $view->render($view_data);
+    }
 }
