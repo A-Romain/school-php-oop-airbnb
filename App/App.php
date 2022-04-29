@@ -12,7 +12,7 @@ use MiladRahimi\PhpRouter\Router;
 
 use ApertureCore\Database\DatabaseConfig;
 use ApertureCore\View;
-use App\Controller\PageController;
+use App\Controller\ResaController;
 use App\Controller\ConnexionController;
 
 class App implements DatabaseConfig
@@ -69,12 +69,13 @@ class App implements DatabaseConfig
 
     private function registerNewRoutes() : void
     {
-        $this->router->get('/', [PageController::class,'index']);
-            $this->router->get('/mentions-legales', [PageController::class,'legalNotice']);
+        $this->router->get('/', [ResaController::class,'index']);
+            $this->router->get('/mentions-legales', [ResaController::class,'legalNotice']);
             $this->router->get('/connexion', [ConnexionController::class,'connexion']);
             $this->router->get('/annonce', [AnnoncesController::class,'listeRentals']);
             $this->router->get('/reservation',[ReservationController::class,'listeRentals']);
             $this->router->get('/detail/{id}', [DetailController::class,'detailRentals']);
+            $this->router->get('/new-annonce', [AnnoncesController::class,'annonceAjout']);
 
     }
 

@@ -11,6 +11,7 @@ class Rentals extends Model
     public int $owner_id;
     public int $type;
     public int $surface;
+    public int $capacity;
     public string $description;
     public float $price;
     public Adresses $adresses;

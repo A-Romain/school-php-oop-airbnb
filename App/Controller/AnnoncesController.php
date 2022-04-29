@@ -8,16 +8,13 @@ use App\AppRepoManager;
 
 class AnnoncesController
 {
-    public function annonce(): void
+    public function annonceAjout(): void
     {
-        $view_data = [
-            'h1_tag' => 'Annonces',
-        ];
 
-        $view = new View('pages/listAnnonces');
+        $view = new View('pages/ajoutAnnonce');
         $view->title = 'Annonces';
 
-        $view->render($view_data);
+        $view->render();
     }
 
     public function listeRentals()

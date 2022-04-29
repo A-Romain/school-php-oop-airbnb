@@ -34,7 +34,7 @@ main{
     justify-content: center;
 }
 
-form {
+form{
     width:100%;
     padding: 30px;
     border: 1px solid #f1f1f1;
@@ -48,13 +48,17 @@ form {
 }
 
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+input, button{
     background-color: #f1f1f1;
 }
 
@@ -72,6 +76,14 @@ input[type=submit]:hover {
     background-color: white;
     color: #A9EAFE;
     border: 1px solid #A9EAFE;
+}
+
+.cards{
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #FDBFB7;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 

@@ -43,15 +43,17 @@ class RentalsRepository extends Repository
     public function detail(int $id): array
     {
         $array = [];
-        $q = 'select * from rentals join rental_equipment re on rentals.id = re.rental_id
-                join addresses a on a.id = rentals.address_id where rental_id = :id';
+        $q = 'select * from rentals where id = :id';
 
         $stmt = $this->pdo->prepare($q);
         $stmt->execute([':id'=>$id]);
 
         while ($row = $stmt->fetch())
         {
-            $array[] = new Rentals($row);
+            $detail = new Rentals($row);
+            $detail->adresses = AppRepoManager::getRm()->getAdressesRepository()->addreses($detail->id);
+            $detail->equipement = AppRepoManager::getRm()->getEquipementRepository()->allEquipements($detail->id);
+            $array[] = $detail;
         }
         return $array;
     }

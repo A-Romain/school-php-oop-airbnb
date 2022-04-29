@@ -21,6 +21,7 @@
                 <ul>
                     <li><a href="/annonce">Annonce</a> </li>
                     <li><a href="/reservation">Réservation</a></li>
+                    <li><a href="/new-annonce">Ajout Annonce</a></li>
                 </ul>
             </nav>
         </div>
