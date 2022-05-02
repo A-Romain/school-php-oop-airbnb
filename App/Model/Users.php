@@ -4,9 +4,9 @@ namespace App\Model;
 
 use ApertureCore\Model;
 
-class Users  extends Model
+class Users extends Model
 {
-    public string $mail;
+    public string $email;
     public string $password;
-    public int $type;
+    public string $type;
 }

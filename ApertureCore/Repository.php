@@ -46,6 +46,35 @@ abstract class Repository
         $model = $sth->fetch();
 
         return !empty($model) ? new $class_name($model): null;
+    }
 
+    /**
+     * @param string $class_name
+     * @param array $data
+     * @return bool|null
+     */
+    public function insert(string $class_name, array $data)
+    {
+        $query_first_part = sprintf('INSERT INTO `%s` (', $this->getTableName());
+        $query_second_part = ') VALUES (';
+        $query_third_part = ');';
+
+        foreach ($data as $column_name => $column_value) {
+            $query_first_part .= "`$column_name`";
+            $query_second_part .= "'$column_value'";
+
+            if ($column_name !== array_key_last($data)) {
+                $query_first_part .= ", ";
+                $query_second_part .= ", ";
+            }
+        }
+
+        $query = $query_first_part . $query_second_part . $query_third_part;
+
+        $statement_handle = $this->pdo->prepare($query);
+
+        if (!$statement_handle) return null;
+
+        return $statement_handle->execute(); // TODO: retourner la ligne inseree
     }
 }

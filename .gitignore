@@ -3,3 +3,4 @@
 .lando.yml
 .htaccess
 composer.lock
+composer.phar

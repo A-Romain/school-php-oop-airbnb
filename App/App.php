@@ -70,13 +70,21 @@ class App implements DatabaseConfig
 
     private function registerNewRoutes() : void
     {
-            $this->router->get('/', [ResaController::class,'index']);
-            $this->router->get('/mentions-legales', [ResaController::class,'legalNotice']);
-            $this->router->get('/connexion', [ConnexionController::class,'connexion']);
-            $this->router->any('/annonce', [AnnoncesController::class,'listeRentals']);
-            $this->router->any('/reservation',[ReservationController::class, 'formResa']);
-            $this->router->any('/detail/{id}', [DetailController::class,'detailRentals']);
-            $this->router->any('/new-annonce', [AnnoncesController::class,'annonceAjout']);
+        $this->router->get('/', [ConnexionController::class,'connexion']);
+//            $this->router->get('/mentions-legales', [ResaController::class,'legalNotice']);
+
+        // Connexion
+        $this->router->get('/connexion', [ConnexionController::class,'connexion']);
+        $this->router->post('/connexion', [ConnexionController::class,'signIn']);
+
+        // Inscription
+        $this->router->get('/inscription', [ConnexionController::class,'inscription']);
+        $this->router->post('/inscription', [ConnexionController::class,'signUp']);
+
+        $this->router->any('/annonce', [AnnoncesController::class,'listeRentals']);
+        $this->router->any('/reservation',[ReservationController::class, 'formResa']);
+        $this->router->any('/detail/{id}', [DetailController::class,'detailRentals']);
+        $this->router->any('/new-annonce', [AnnoncesController::class,'annonceAjout']);
     }
 
     private function startRouter() : void
