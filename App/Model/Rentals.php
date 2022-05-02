@@ -16,4 +16,6 @@ class Rentals extends Model
     public float $price;
     public Adresses $adresses;
     public array $equipement;
+    public array $rentals;
+
 }

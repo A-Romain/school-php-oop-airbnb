@@ -20,16 +20,30 @@ class ReservationController
         $view->render($view_data);
     }
 
-    public function listeRentals()
+
+    public function formResa()
     {
+
+        $_SESSION['user_id'] = 3;
+
+        if(!empty($_POST)){
+
+            AppRepoManager::getRm()->getBookingsRepository()->resabooking($_POST);
+
+        }
+
+        $array = AppRepoManager::getRm()->getBookingsRepository()->findByUserId($_SESSION['user_id']);
+
         $view = new View('pages/listeReservation');
 
-        $arr = AppRepoManager::getRm()->getRentalsRepository()->rentals();
-
-
         $view_data = [
-            'rentals' => $arr,
+
+            'rentals' => $array,
         ];
+
         $view->render($view_data);
+
     }
+
+
 }

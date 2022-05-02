@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Controller\AjoutAnnonces;
 use App\Controller\AnnonceController;
 use App\Controller\AnnoncesController;
 use App\Controller\DetailController;
@@ -69,14 +70,13 @@ class App implements DatabaseConfig
 
     private function registerNewRoutes() : void
     {
-        $this->router->get('/', [ResaController::class,'index']);
+            $this->router->get('/', [ResaController::class,'index']);
             $this->router->get('/mentions-legales', [ResaController::class,'legalNotice']);
             $this->router->get('/connexion', [ConnexionController::class,'connexion']);
-            $this->router->get('/annonce', [AnnoncesController::class,'listeRentals']);
-            $this->router->get('/reservation',[ReservationController::class,'listeRentals']);
-            $this->router->get('/detail/{id}', [DetailController::class,'detailRentals']);
-            $this->router->get('/new-annonce', [AnnoncesController::class,'annonceAjout']);
-
+            $this->router->any('/annonce', [AnnoncesController::class,'listeRentals']);
+            $this->router->any('/reservation',[ReservationController::class, 'formResa']);
+            $this->router->any('/detail/{id}', [DetailController::class,'detailRentals']);
+            $this->router->any('/new-annonce', [AnnoncesController::class,'annonceAjout']);
     }
 
     private function startRouter() : void

@@ -4,6 +4,7 @@ namespace App\Model\Repository;
 
 use ApertureCore\Repository;
 use App\Model\Adresses;
+use MongoDB\Driver\Exception\ServerException;
 
 class AdressesRepository extends Repository
 {
@@ -34,4 +35,41 @@ class AdressesRepository extends Repository
         }
         return $array;
     }
+
+    public function findByAddressesId(int $user_id)
+    {
+
+        $q = 'select * from addresses where rental_id = :rental_id';
+
+        $stmt = $this->pdo->prepare($q);
+
+        $stmt->execute(['user_id' => $user_id]);
+
+        $data =[];
+
+        while($row = $stmt->fetch()){
+            $row_data = new Bookings($row);
+            $row_data->rentals = AppRepoManager::getRm()->getRentalsRepository()->detail($row_data->rental_id);
+            $data[] = $row_data;
+
+        }
+
+        return $data;
+    }
+
+    public function ajoutAdresse($data)
+    {
+        $q = "INSERT INTO addresses (city, country) 
+                VALUES (:city , :country);";
+
+        $stmt = $this->pdo->prepare($q);
+        $stmt->execute([
+            'city' => $data ['city'],
+            'country' => $data ['country'],
+        ]);
+
+    }
+
+
+
 }

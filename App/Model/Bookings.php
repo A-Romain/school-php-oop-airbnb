@@ -12,4 +12,5 @@ class Bookings extends Model
     public string $chek_out;
     public Adresses $adresses;
     public array $equipement;
+    public array $rentals;
 }

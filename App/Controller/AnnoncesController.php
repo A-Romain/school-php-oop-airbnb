@@ -29,4 +29,5 @@ class AnnoncesController
         ];
         $view->render($view_data);
     }
+
 }

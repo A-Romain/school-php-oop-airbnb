@@ -17,33 +17,11 @@
         </div>
 
         <div class="formResa">
-            <form method="post" action="" class="null">
+            <form method="post" action="/reservation" class="null">
                 <label>Date d'arrivée</label>
-                <div class="days">
-                    <label>Jours</label>
-                    <input type="number" min="01" max="31" class="chek_in_day" name="check_day">
-                </div>
-                <div>
-                    <label>Mois</label>
-                    <input type="number" min="01" max="12" class="chek_in_month" name="check_month">
-                </div>
-                <div>
-                    <label>Année</label>
-                    <input type="number" min="00" max="2077" class="chek_in_years" name="chek_years">
-                </div>
+                <input type="date" value="chek_in" name="chek_in">
                 <label>Date de départ</dép></label>
-                <div class="days">
-                    <label>Jours</label>
-                    <input type="number" min="01" max="31" class="chek_out_day" name="check_day">
-                </div>
-                <div>
-                    <label>Mois</label>
-                    <input type="number" min="01" max="12" class="chek_out_month" name="check_month">
-                </div>
-                <div>
-                    <label>Année</label>
-                    <input type="number" min="00" max="2077" class="chek_out_years" name="chek_years">
-                </div>
+                <input type="date" value="chek_out" name="chek_out">
                 <input type="submit" id="reserve" value="Reservée">
             </form>
         </div>

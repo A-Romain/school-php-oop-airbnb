@@ -36,5 +36,19 @@ class EquipementRepository extends Repository
        return $array;
     }
 
+
+    public function ajoutEquipement()
+    {
+        $q = "INSERT INTO rental_equipment (rental_id, equipment_id) 
+                VALUES (:rental_id, :equipment_id);";
+
+        $stmt = $this->pdo->prepare($q);
+        $stmt->execute([
+           'rental_id' => rental_id,
+           'equipment_id' => label ,
+        ]);
+    }
+
+
 }
 
