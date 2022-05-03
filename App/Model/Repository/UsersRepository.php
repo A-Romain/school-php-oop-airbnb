@@ -5,6 +5,7 @@ namespace App\Model\Repository;
 use ApertureCore\Repository;
 use App\Model\Toy;
 use App\Model\Users;
+use Couchbase\User;
 
 class UsersRepository extends Repository
 {
@@ -38,9 +39,22 @@ class UsersRepository extends Repository
 
         $database_return = $statement_handle->fetch();
 
-        var_dump($statement_handle, $database_return);
+        //var_dump($statement_handle, $database_return);
 
         return !empty($database_return) ? new Users($database_return): null; // return the model
+    }
+
+    public function findUser(string $email, string $password)
+    {
+        $query = sprintf("select * from %s where email = :email and password = :password;", $this->getTableName());
+
+        $sth = $this->pdo->prepare($query);
+
+        $sth->execute(['email' => $email, 'password' => $password]);
+
+        $database_return = $sth->fetch();
+
+        return !empty($database_return) ? new Users($database_return): null;
     }
 
 }

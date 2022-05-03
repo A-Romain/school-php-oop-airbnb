@@ -35,10 +35,30 @@ class ConnexionController
 
     }
 
+    /**
+     * Route inscription
+     * Method : POST
+     * Description : Perment la connexion de l'utilisateur
+     */
     public function signIn(): void
     {
-        // Recuperer les fields
-        // Verifier que l'email, mot de passe is good et type
+        $input_fields_connect = array(
+            "email" => $_POST["email"],
+            "password" => $_POST["password"],
+            "type" => $_POST["type"],
+        );
+
+        if (AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']) === null){
+            View::renderError(503);
+            return;
+        }
+
+        $user = AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']);
+        $_SESSION['user_id'] = $user->id;
+        var_dump($_SESSION); die();
+
+
+
         // Enregistrer en session l'utilisateur
     }
 
@@ -99,8 +119,13 @@ class ConnexionController
         }
 
         // Enregistrer session (user id)
-//        $_SESSION["USER_ID"] = $user->id;
 
         // Redirect
+
+
+        $view = new View('pages/connexion');
+        $view->title = 'Connexion';
+
+        $view->render();
     }
 }
