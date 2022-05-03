@@ -40,6 +40,19 @@ class RentalsRepository extends Repository
 
     }
 
+    public function rentalsByUsers(string $owner_id)
+    {
+        $query = sprintf("SELECT * FROM %S WHERE owner_id = :owner_id;", $this->getTableName());
+
+        $sth = $this->pdo->prepare($query);
+
+        $sth->execute(['owner_id' => $owner_id]);
+
+        $database_return = $sth->fetch();
+
+        return !empty($database_return) ? new Rentals($database_return): null;
+    }
+
     public function detail(int $id): array
     {
         $array = [];
@@ -58,7 +71,7 @@ class RentalsRepository extends Repository
         return $array;
     }
 
-    public function  ajoutAnnonce($data)
+    public function addAnnonces($data)
     {
         $q = "INSERT INTO rentals ( owner_id, type, surface, description, capacity, price, address_id) 
                 values (:owner_id, :type, :surface, :description, :capacity, :price, :address_id);";

@@ -32,20 +32,17 @@ class ConnexionController
         $view->title = 'Inscription';
 
         $view->render();
-
     }
 
     /**
      * Route inscription
      * Method : POST
-     * Description : Perment la connexion de l'utilisateur
+     * Description : Permée la connexion de l'utilisateur
      */
     public function signIn(): void
     {
         $input_fields_connect = array(
-            "email" => $_POST["email"],
-            "password" => $_POST["password"],
-            "type" => $_POST["type"],
+            "rentals" => [],
         );
 
         if (AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']) === null){
@@ -54,12 +51,32 @@ class ConnexionController
         }
 
         $user = AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']);
+
         $_SESSION['user_id'] = $user->id;
-        var_dump($_SESSION); die();
+        $_SESSION['user_type'] = $user->type;
 
+        //switch qui permet de rediriger selon sont type d'utilisateur
+        switch ($_SESSION['user_type']){
+            case STANDARD:
+             $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentals();
+                $input_fields_connect['rentals'] = $rentals;
+                break;
 
+            case ANNONCEUR:
+               $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentalsByUsers();
+                $input_fields_connect['rentals'] = $rentals;
+                break;
 
-        // Enregistrer en session l'utilisateur
+                default:
+                View::renderError(500);
+                break;
+        }
+
+        $view = new View('pages/listAnnonces');
+        $view->title = 'Connexion';
+
+        $view->render($input_fields_connect);
+
     }
 
     /**
@@ -117,11 +134,6 @@ class ConnexionController
             View::renderError(500);
             return;
         }
-
-        // Enregistrer session (user id)
-
-        // Redirect
-
 
         $view = new View('pages/connexion');
         $view->title = 'Connexion';
