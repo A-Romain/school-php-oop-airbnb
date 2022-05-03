@@ -71,21 +71,21 @@ class RentalsRepository extends Repository
         return $array;
     }
 
-    public function addAnnonces($data)
+    public function insertRental($data)
     {
-        $q = "INSERT INTO rentals ( owner_id, type, surface, description, capacity, price, address_id) 
-                values (:owner_id, :type, :surface, :description, :capacity, :price, :address_id);";
-
-        $stmt = $this->pdo->prepare($q);
-        $stmt->execute([
-            'owner_id' => $_SESSION['user_id'],
-            'type' => $data ['type'],
-            'surface' => $data ['surface'],
-            'description' => $data ['description'],
+        $prepared_data = [
+            'owner_id' => $data['owner_id'],
+            'type' => $data['type'],
+            'surface' => $data['surface'],
+            'description' => $data['description'],
             'capacity' =>  $data['capacity'],
             'price' => $data['price'],
-            'address_id' => address_id,
-        ]);
+            'address_id' => $data['address_id'],
+        ];
+
+        $this->insert(Rentals::class, $prepared_data);
+
+        return $this->pdo->lastInsertId();
     }
 
 }

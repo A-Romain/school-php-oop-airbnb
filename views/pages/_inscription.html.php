@@ -20,7 +20,7 @@
                 </label>
             </div>
         </fieldset>
-        <input type="submit" value="Connexion">
-        <a href="/connexion">Déjà inscrit ?</a>
+        <input type="submit" value="S'enregistrer">
+        <a href="/connexion">→ Déjà inscrit ?</a>
     </form>
 </div>

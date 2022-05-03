@@ -3,31 +3,29 @@
 namespace App\Controller;
 
 use ApertureCore\View;
-use App\App;
 use App\AppRepoManager;
-use App\Model\Repository\UsersRepository;
+use Laminas\Diactoros\Response\RedirectResponse;
 
 class ConnexionController
 {
     /**
      * Rend la vue connexion à l'utilisateur
      */
-    public function connexion() : void
+    public function getConnexionView() : void
     {
-
         $view = new View('pages/connexion');
         $view->title = 'Connexion';
 
         $view->render();
-
     }
 
     /**
-     * Rend la vue inscription à l'utilisateur
+     * Route /inscription
+     * Method : GET
+     * Description : Rend la vue inscription à l'utilisateur
      */
-    public function inscription() : void
+    public function getInscriptionView() : void
     {
-
         $view = new View('pages/inscription');
         $view->title = 'Inscription';
 
@@ -35,48 +33,30 @@ class ConnexionController
     }
 
     /**
-     * Route inscription
+     * Route /inscription
      * Method : POST
      * Description : Permée la connexion de l'utilisateur
      */
-    public function signIn(): void
+    public function signIn()
     {
-        $input_fields_connect = array(
-            "rentals" => [],
-        );
-
-        if (AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']) === null){
-            View::renderError(503);
+        // Verifie si les champs sont presents
+        if (!$_POST["email"] || ! $_POST['password']) {
+            View::renderError(400);
             return;
         }
 
         $user = AppRepoManager::getRm()->getUsersRepository()->findUser($_POST['email'], $_POST['password']);
 
+        // Verifie si on a bien un utilisateur
+        if (!$user){
+            View::renderError(404);
+            return;
+        }
+
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_type'] = $user->type;
 
-        //switch qui permet de rediriger selon sont type d'utilisateur
-        switch ($_SESSION['user_type']){
-            case STANDARD:
-             $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentals();
-                $input_fields_connect['rentals'] = $rentals;
-                break;
-
-            case ANNONCEUR:
-               $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentalsByUsers();
-                $input_fields_connect['rentals'] = $rentals;
-                break;
-
-                default:
-                View::renderError(500);
-                break;
-        }
-
-        $view = new View('pages/listAnnonces');
-        $view->title = 'Connexion';
-
-        $view->render($input_fields_connect);
-
+        return new RedirectResponse("/annonces");
     }
 
     /**
@@ -84,7 +64,7 @@ class ConnexionController
      * Method: POST
      * Description: Permet l'inscription de l'utilisateur
      */
-    public function signUp(): void
+    public function signUp()
     {
         $input_fields = array(
             "email" => $_POST["email"],
@@ -135,9 +115,17 @@ class ConnexionController
             return;
         }
 
-        $view = new View('pages/connexion');
-        $view->title = 'Connexion';
+        return new RedirectResponse("/connexion");
+    }
 
-        $view->render();
+    /**
+     * Route: /deconnexion
+     * Method: GET
+     * Description: Permet la deconnexion de l'utilisateur
+     */
+    function signOut() {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_type']);
+        return new RedirectResponse("/connexion");
     }
 }

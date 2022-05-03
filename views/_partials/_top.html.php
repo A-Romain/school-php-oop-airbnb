@@ -19,9 +19,21 @@
         <div class="nav_bar">
             <nav>
                 <ul>
-                    <li><a href="/annonce">Annonce</a> </li>
+                    <li><a href="/annonces">Annonces</a> </li>
                     <li><a href="/reservation">Réservation</a></li>
                     <li><a href="/new-annonce">Ajout Annonce</a></li>
+                    <?php
+                        if (isset($_SESSION["user_id"])) {
+                            ?>
+                            <li><a href="/deconnexion">Deconnexion</a></li>
+                            <?php
+                        }
+                        else {
+                            ?>
+                            <li><a href="/connexion">Connexion</a></li>
+                            <?php
+                        }
+                    ?>
                 </ul>
             </nav>
         </div>

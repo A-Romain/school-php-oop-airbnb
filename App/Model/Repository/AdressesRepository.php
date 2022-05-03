@@ -64,10 +64,10 @@ class AdressesRepository extends Repository
 
         $stmt = $this->pdo->prepare($q);
         $stmt->execute([
-            'city' => $data ['city'],
-            'country' => $data ['country'],
+            'city' => $data['city'],
+            'country' => $data['country'],
         ]);
-
+        return $this->pdo->lastInsertId();
     }
 
 

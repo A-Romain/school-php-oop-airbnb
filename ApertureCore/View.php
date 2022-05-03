@@ -6,7 +6,7 @@ class View
 {
 
     public const PATH_VIEWS = PATH_ROOT . 'views' . DS;
-    public const ERROR_LIST = [400, 403, 404, 500, 503];
+    public const ERROR_LIST = [400, 401, 403, 404, 500, 503];
     public string $title = 'DEFAULT FRAMEWORK PAGE NAME';
     private string $name;
     private bool $is_complete;

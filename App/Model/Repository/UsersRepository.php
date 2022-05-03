@@ -46,7 +46,7 @@ class UsersRepository extends Repository
 
     public function findUser(string $email, string $password)
     {
-        $query = sprintf("select * from %s where email = :email and password = :password;", $this->getTableName());
+        $query = sprintf("SELECT * FROM %s WHERE email = :email AND password = :password;", $this->getTableName());
 
         $sth = $this->pdo->prepare($query);
 

@@ -23,8 +23,11 @@ class ReservationController
 
     public function formResa()
     {
-
-        $_SESSION['user_id'] = 3;
+        // Verifie si l'utilisateur est connecte
+        if (!isset($_SESSION["user_id"])) {
+            View::renderError(401);
+            return;
+        }
 
         if(!empty($_POST)){
 

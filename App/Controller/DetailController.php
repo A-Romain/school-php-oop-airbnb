@@ -17,10 +17,11 @@ class DetailController
 
     public function detailRentals(int $id)
     {
-        $_SESSION['user_id'] = 2;
-        $_SESSION['rentals'] = $id;
-
-
+        // Verifie si l'utilisateur est connecte
+        if (!isset($_SESSION["user_id"])) {
+            View::renderError(401);
+            return;
+        }
 
         $view = new View('pages/detailAnnonce');
         $arr = AppRepoManager::getRm()->getRentalsRepository()->detail($id);
