@@ -23,21 +23,29 @@ class BookingsRepository extends Repository
         return $this->readById(Rentals::class, $id);
     }
 
+    /**
+     * @param array $data
+     * @return false|string
+     */
     public function resabooking(array $data)
     {
-        $q = 'insert into bookings(user_id, rental_id, chek_in, chek_out) values (:user_id,:rental_id,:chek_in, :chek_out)';
+        $prepared_reservation_data = [
+            'user_id' => $_SESSION['user_id'],
+            'rental_id' => $_SESSION['rental_id'],
+            'chek_in' => $data['chek_in'],
+            'chek_out' => $data['chek_out'],
+        ];
 
-        $stmt = $this->pdo->prepare($q);
-        $stmt->execute([
-          ':user_id' => $_SESSION ['user_id'],
-            ':rental_id' => $_SESSION ['rentals'],
-            ':chek_in' => $data['chek_in'],
-            ':chek_out' => $data['chek_out'],
-        ]);
+        $this->insert(Bookings::class, $prepared_reservation_data);
+
+        return $this->pdo->lastInsertId();
     }
 
 
-
+    /**
+     * @param int $user_id
+     * @return array
+     */
     public function findByUserId(int $user_id)
     {
 

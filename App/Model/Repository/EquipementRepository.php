@@ -20,6 +20,10 @@ class EquipementRepository extends Repository
         return $this->readById(Equipements::class, $id);
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function allEquipements(int $id): array
     {
         $array = [];
@@ -36,7 +40,10 @@ class EquipementRepository extends Repository
        return $array;
     }
 
-
+    /**
+     * @param $label
+     * @return false|string
+     */
     public function addEquipment($label)
     {
         $q = "INSERT INTO equipments (`label`) VALUES (:label);";

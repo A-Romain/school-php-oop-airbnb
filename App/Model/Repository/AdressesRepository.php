@@ -20,22 +20,29 @@ class AdressesRepository extends Repository
         return $this->readById(Adresses::class, $id);
     }
 
-    public function addreses(int $id): Adresses
+    /**
+     * @param int $id
+     * @return Adresses
+     */
+    public function addreses(int $id): ?Adresses
     {
-        $array = [];
 
         $q  = 'select * from addresses where id = :id;';
 
         $stmt = $this->pdo->prepare($q);
 
         $stmt->execute([':id'=>$id]);
-        while ($row = $stmt->fetch())
-        {
-            $array = new Adresses($row);
-        }
-        return $array;
+
+        $row = $stmt->fetch();
+
+        return  (!empty($row)) ? new Adresses($row):  null;
+
     }
 
+    /**
+     * @param int $user_id
+     * @return array
+     */
     public function findByAddressesId(int $user_id)
     {
 
@@ -51,12 +58,14 @@ class AdressesRepository extends Repository
             $row_data = new Bookings($row);
             $row_data->rentals = AppRepoManager::getRm()->getRentalsRepository()->detail($row_data->rental_id);
             $data[] = $row_data;
-
         }
-
         return $data;
     }
 
+    /**
+     * @param $data
+     * @return false|string
+     */
     public function ajoutAdresse($data)
     {
         $q = "INSERT INTO addresses (city, country) 
@@ -69,7 +78,5 @@ class AdressesRepository extends Repository
         ]);
         return $this->pdo->lastInsertId();
     }
-
-
 
 }

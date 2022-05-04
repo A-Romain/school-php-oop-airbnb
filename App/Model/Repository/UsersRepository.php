@@ -44,6 +44,11 @@ class UsersRepository extends Repository
         return !empty($database_return) ? new Users($database_return): null; // return the model
     }
 
+    /**
+     * @param string $email
+     * @param string $password
+     * @return Users|null
+     */
     public function findUser(string $email, string $password)
     {
         $query = sprintf("SELECT * FROM %s WHERE email = :email AND password = :password;", $this->getTableName());

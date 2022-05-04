@@ -22,6 +22,9 @@ class RentalsRepository extends Repository
         return $this->readById(Rentals::class, $id);
     }
 
+    /**
+     * @return array
+     */
     public function rentals(): array
     {
         $array = [];
@@ -40,19 +43,35 @@ class RentalsRepository extends Repository
 
     }
 
+    /**
+     * @param string $owner_id
+     * @return array
+     */
     public function rentalsByUsers(string $owner_id)
     {
-        $query = sprintf("SELECT * FROM %S WHERE owner_id = :owner_id;", $this->getTableName());
+        $array = [];
+        $query = sprintf("SELECT * FROM %s WHERE owner_id = :owner_id;", $this->getTableName());
 
         $sth = $this->pdo->prepare($query);
 
         $sth->execute(['owner_id' => $owner_id]);
 
-        $database_return = $sth->fetch();
+        while ($row = $sth->fetch())
+        {
+            $detail = new Rentals($row);
 
-        return !empty($database_return) ? new Rentals($database_return): null;
+            $detail->adresses = AppRepoManager::getRm()->getAdressesRepository()->addreses($detail->address_id);
+            $detail->equipement = AppRepoManager::getRm()->getEquipementRepository()->allEquipements($detail->id);
+            $array[] = $detail;
+        }
+        return $array;
+
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function detail(int $id): array
     {
         $array = [];
@@ -71,6 +90,10 @@ class RentalsRepository extends Repository
         return $array;
     }
 
+    /**
+     * @param $data
+     * @return false|string
+     */
     public function insertRental($data)
     {
         $prepared_data = [

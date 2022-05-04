@@ -126,6 +126,6 @@ class ConnexionController
     function signOut() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_type']);
-        return new RedirectResponse("/connexion");
+        return new RedirectResponse("/");
     }
 }

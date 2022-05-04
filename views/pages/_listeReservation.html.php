@@ -3,7 +3,7 @@
 
     <?php foreach ($rentals as $item){
         foreach ($item->rentals as $key){ ?>
-        <div>
+        <div class="cards">
             <img src="/assets/img/kamehouse.jpg">
             <p>Price: <?php echo $key->price ?>€</p>
             <p>Surface: <?php echo $key->surface ?>m2</p>

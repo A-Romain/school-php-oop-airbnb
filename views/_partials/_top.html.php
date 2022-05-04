@@ -25,7 +25,7 @@
                     <?php
                         if (isset($_SESSION["user_id"])) {
                             ?>
-                            <li><a href="/deconnexion">Deconnexion</a></li>
+                            <li><a href="/connexion">Deconnexion</a></li>
                             <?php
                         }
                         else {

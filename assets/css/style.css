@@ -1,5 +1,8 @@
 body{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container_header{
@@ -32,7 +35,10 @@ li{
 main{
     display: flex;
     justify-content: center;
+    flex-grow: 1;
 }
+
+
 
 form{
     width:100%;
@@ -76,6 +82,10 @@ input[type=submit]:hover {
     background-color: white;
     color: #A9EAFE;
     border: 1px solid #A9EAFE;
+}
+
+.container_connexion{
+    padding-top: 160px;
 }
 
 .cards{

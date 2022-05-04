@@ -71,10 +71,10 @@ abstract class Repository
 
         $query = $query_first_part . $query_second_part . $query_third_part;
 
-        $statement_handle = $this->pdo->prepare($query);
+        $sth = $this->pdo->prepare($query);
 
-        if (!$statement_handle) return null;
+        if (!$sth) return null;
 
-        return $statement_handle->execute(); // TODO: retourner la ligne inseree
+        return $sth->execute(); // TODO: retourner la ligne inseree
     }
 }

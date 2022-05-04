@@ -75,22 +75,22 @@ class App implements DatabaseConfig
 //            $this->router->get('/mentions-legales', [ResaController::class,'legalNotice']);
 
         // Connexion (unauthorized)
-        $this->router->get('/connexion', [ConnexionController::class, 'getConnexionView']);
+        $this->router->any('/connexion', [ConnexionController::class, 'getConnexionView']);
         $this->router->post('/connexion', [ConnexionController::class,'signIn']);
-        $this->router->get('/deconnexion', [ConnexionController::class,'signOut']);
+        $this->router->get('/connexion', [ConnexionController::class,'signOut']);
 
         // Inscription (unauthorized)
         $this->router->get('/inscription', [ConnexionController::class, 'getInscriptionView']);
         $this->router->post('/inscription', [ConnexionController::class,'signUp']);
 
         // (authorized)
-        $this->router->get('/annonces', [AnnoncesController::class, 'getRentalsView']);
+        $this->router->any('/annonces', [AnnoncesController::class, 'getRentalsView']);
 
         $this->router->get('/new-annonce', [AnnoncesController::class, 'getAddRentalView']);
         $this->router->post('/new-annonce', [AnnoncesController::class, 'addRental']);
 
-        $this->router->get('/reservation',[ReservationController::class, 'formResa']);
-        $this->router->get('/detail/{id}', [DetailController::class,'detailRentals']);
+        $this->router->any('/reservation',[ReservationController::class, 'formResa']);
+        $this->router->any('/detail/{id}', [DetailController::class,'detailRentals']);
     }
 
     private function startRouter() : void

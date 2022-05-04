@@ -20,7 +20,11 @@ class ReservationController
         $view->render($view_data);
     }
 
-
+    /**
+     * Route: /reservation
+     * Method: POST
+     * Description: Permet la reservation de l'utilisateur
+     */
     public function formResa()
     {
         // Verifie si l'utilisateur est connecte

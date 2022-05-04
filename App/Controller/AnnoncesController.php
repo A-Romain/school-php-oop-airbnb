@@ -48,12 +48,12 @@ class AnnoncesController
 
         // Switch qui permet de rediriger selon son type d'utilisateur
         switch ($_SESSION['user_type']){
-            case "STANDARD":
+            case "standard":
                 $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentals();
                 break;
 
-            case "ANNONCEUR":
-                $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentalsByUsers();
+            case "annonceur":
+                $rentals = AppRepoManager::getRm()->getRentalsRepository()->rentalsByUsers($_SESSION['user_id']);
                 break;
 
             default:
@@ -88,7 +88,7 @@ class AnnoncesController
         }
 
         // Ne peut pas poster si c'est un standard
-        if ($_SESSION["user_type"] !== "ANNONCEUR") {
+        if ($_SESSION["user_type"] !== "annonceur") {
             View::renderError(401);
             return;
         }
@@ -128,7 +128,7 @@ class AnnoncesController
         // 3) Verifie si equipements present
         if (!$input_fields["equipments"]) {
             // Redirige vers la liste des annonces
-            return new RedirectResponse("/connexion");
+            return new RedirectResponse("/annonces");
         }
 
         // 4) Sauvegarde les equipements

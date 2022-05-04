@@ -15,8 +15,14 @@ class DetailController
         $view->render();
     }
 
+    /**
+     * Route: /detail
+     * Method: POST
+     * Description: Permet de voir le detail d'une annonce a l'utilisateur
+     */
     public function detailRentals(int $id)
     {
+        $_SESSION['rental_id'] = $id;
         // Verifie si l'utilisateur est connecte
         if (!isset($_SESSION["user_id"])) {
             View::renderError(401);
